@@ -10,19 +10,13 @@
 
 @media screen and (max-width: 768px) {
   .page {
-    font-size: 12px;
+    font-size: 1.3vw;
   }
 }
 
 @media screen and (max-width: 544px) {
   .page {
-    font-size: 2.625vw;
+    font-size: 2.5vw;
     padding: 8.75vw 5.93vw 11.25vw;
-  }
-}
-
-@media screen and (max-width: 320px) {
-  .page {
-    font-size: 8px;
   }
 }

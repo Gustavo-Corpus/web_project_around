@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Un viaje épico de Kentucky a Burundi" />
+    <meta name="author" content="Gustavo Corpus" />
+    <meta name="keywords" content="mediaqueries, proyecto 7" />
+    <title>Alrededor de los EE.UU.</title>
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" href="./pages/index.css" />
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <img src="images/logo.svg" alt="" class="header__logo" />
+      </header>
+      <main class="content">
+        <section class="profile">
+          <img
+            src="images/perfil.jpg"
+            alt="Imagen de perfil"
+            class="profile__avatar"
+          />
+
+          <h2 class="profile__info-title">Jacques Cousteau</h2>
+          <h3 class="profile__info-subtitle">Explorador</h3>
+
+          <button class="button-edit">
+            <img
+              src="images/Edit_Button.svg"
+              alt="Boton para editar el perfil"
+              class="button-icon"
+            />
+          </button>
+          <button class="button-add"></button>
+        </section>
+        <section class="elements">
+          <div class="elements__item">
+            <img
+              src="images/1.jpg"
+              alt="Río rodeado de pinos en el Valle de Yosemite al atardecer"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Valle de Yosemite</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="elements__item">
+            <img
+              src="images/2.jpg"
+              alt="Lago Louise con montañas reflejadas en el agua, cielo despejado"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Lago Louise</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="elements__item">
+            <img
+              src="images/3.jpg"
+              alt="Montañas con un cielo rojizo durante el amanecer"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Montañas Calvas</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="elements__item">
+            <img
+              src="images/4.jpg"
+              alt="Cielo estrellado sobre el macizo de Latemar"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Latemar</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="elements__item">
+            <img
+              src="images/5.jpg"
+              alt="Reflejo de montañas en el Parque Nacional Vanois al atardecer"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Vanois National Park</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+          <div class="elements__item">
+            <img
+              src="images/6.jpg"
+              alt="Lago di Braies con botes y montañas en el fondo"
+              class="elements__item-image"
+            />
+            <div class="elements__item-content">
+              <h2 class="elements__item-title">Lago di Braies</h2>
+              <button type="button" class="elements__item-button">
+                <img
+                  src="images/like.svg"
+                  alt="Botón de like"
+                  class="elements__item-like"
+                />
+              </button>
+            </div>
+          </div>
+        </section>
+        <section class="popup">
+          <div class="popup__container">
+            <button type="button" class="popup__close"></button>
+            <h3 class="popup__title">Editar perfil</h3>
+            <form class="popup__form" name="edit-profile">
+              <input
+                type="text"
+                name="name"
+                class="popup__input popup__input-name"
+                placeholder="Nombre"
+                required
+              />
+              <input
+                type="text"
+                name="job"
+                class="popup__input popup__input-job"
+                placeholder="Acerca de mí"
+                required
+              />
+              <button type="submit" class="popup__button">Guardar</button>
+            </form>
+          </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <p class="footer__copyright">© 2024 Around The U.S.</p>
+      </footer>
+    </div>
+    <script src="./blocks/popup/popup.js"></script>
+  </body>
+</html>

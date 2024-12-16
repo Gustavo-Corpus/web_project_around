@@ -51,7 +51,7 @@ const initialCards = [
   },
 ];
 
-function initialCard(cardData) {
+function createCard(title, link) {
   const cardElement = cardTemplate
     .querySelector(".elements__item")
     .cloneNode(true);
@@ -60,14 +60,14 @@ function initialCard(cardData) {
   const likeButton = cardElement.querySelector(".elements__item-button");
   const deleteButton = cardElement.querySelector(".elements__delete");
 
-  cardImage.src = cardData.link;
-  cardImage.alt = cardData.name;
-  cardTitle.textContent = cardData.name;
+  cardImage.src = link;
+  cardImage.alt = title;
+  cardTitle.textContent = title;
 
   cardImage.addEventListener("click", function () {
-    popupImageElement.src = cardData.link;
-    popupImageElement.alt = cardData.name;
-    imagePopupDescription.textContent = cardData.name;
+    popupImageElement.src = link;
+    popupImageElement.alt = title;
+    imagePopupDescription.textContent = title;
     openPopup(popupImage);
   });
 
@@ -89,7 +89,7 @@ function initialCard(cardData) {
 
 function loadInitialCards() {
   initialCards.forEach((cardData) => {
-    const card = initialCard(cardData);
+    const card = createCard(cardData.name, cardData.link);
     elementsContainer.append(card);
   });
 }
@@ -117,43 +117,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   profileJob.textContent = jobInput.value;
   closePopup(popupEdit);
-}
-
-function createCard(title, link) {
-  const cardElementadd = cardTemplate
-    .querySelector(".elements__item")
-    .cloneNode(true);
-
-  const cardImage = cardElementadd.querySelector(".elements__item-image");
-  const cardTitle = cardElementadd.querySelector(".elements__item-title");
-  const likeButton = cardElementadd.querySelector(".elements__item-button");
-  const deleteButton = cardElementadd.querySelector(".elements__delete");
-
-  cardImage.src = link;
-  cardImage.alt = title;
-  cardTitle.textContent = title;
-
-  cardImage.addEventListener("click", function () {
-    popupImageElement.src = link;
-    popupImageElement.alt = title;
-    imagePopupDescription.textContent = title;
-    openPopup(popupImage);
-  });
-
-  likeButton.addEventListener("click", function (evt) {
-    const likeImage = evt.currentTarget.querySelector(".elements__item-like");
-    if (likeImage.src.includes("like.svg")) {
-      likeImage.src = "images/like-active.svg";
-    } else {
-      likeImage.src = "images/like.svg";
-    }
-  });
-
-  deleteButton.addEventListener("click", function () {
-    cardElementadd.remove();
-  });
-
-  return cardElementadd;
 }
 
 function handleAddCardFormSubmit(evt) {

@@ -101,7 +101,22 @@ function openPopup(popup) {
     popup.classList.add("popup_image_opened");
   } else {
     popup.classList.add("popup_opened");
+    const form = popup.querySelector(".popup__form");
+    if (form) {
+      const inputList = Array.from(form.querySelectorAll(".popup__input"));
+      const buttonElement = form.querySelector(".popup__button");
+      toggleButtonState(inputList, buttonElement, {
+        formSelector: ".popup__form",
+        inputSelector: ".popup__input",
+        submitButtonSelector: ".popup__button",
+        inactiveButtonClass: "popup__button_disabled",
+        inputErrorClass: "popup__input_type_error",
+        errorClass: "popup__error_visible",
+      });
+    }
   }
+  document.addEventListener("keydown", handleEscClose);
+  popup.addEventListener("mousedown", handleOverlayClick);
 }
 
 function closePopup(popup) {
@@ -109,6 +124,28 @@ function closePopup(popup) {
     popup.classList.remove("popup_image_opened");
   } else {
     popup.classList.remove("popup_opened");
+  }
+  document.removeEventListener("keydown", handleEscClose);
+  popup.removeEventListener("mousedown", handleOverlayClick);
+}
+
+function handleEscClose(evt) {
+  if (evt.key === "Escape") {
+    const openedPopup = document.querySelector(
+      ".popup_opened, .popup_image_opened"
+    );
+    if (openedPopup) {
+      closePopup(openedPopup);
+    }
+  }
+}
+
+function handleOverlayClick(evt) {
+  if (
+    evt.target.classList.contains("popup_opened") ||
+    evt.target.classList.contains("popup_image_opened")
+  ) {
+    closePopup(evt.target);
   }
 }
 

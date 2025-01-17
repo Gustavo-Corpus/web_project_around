@@ -1,3 +1,16 @@
+import Card from "./Card.js";
+import FormValidator from "./FormValidator.js";
+import { openPopup, closePopup } from "./utils.js";
+
+const validationConfig = {
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible",
+};
+
 const profileName = document.querySelector(".profile__info-title");
 const profileJob = document.querySelector(".profile__info-subtitle");
 const editButton = document.querySelector(".button-icon");
@@ -13,140 +26,51 @@ const popupAddClose = popupAdd.querySelector(".popup__close");
 const formAdd = document.querySelector("#add_form");
 const titleInput = formAdd.querySelector(".popup__input-title");
 const linkInput = formAdd.querySelector(".popup__input-link");
+const elementsContainer = document.querySelector(".elements");
 
 const popupImage = document.querySelector(".popup_image");
+const popupImageClose = popupImage.querySelector(".popup__close");
 const popupImageElement = popupImage.querySelector(".popup__image");
 const imagePopupDescription = popupImage.querySelector(
   ".popup__image-description"
 );
-const popupImageClose = popupImage.querySelector(".popup__close");
 
-const cardTemplate = document.querySelector("#card-template").content;
-const elementsContainer = document.querySelector(".elements");
+const editFormValidator = new FormValidator(validationConfig, formEdit);
+const addFormValidator = new FormValidator(validationConfig, formAdd);
+
+editFormValidator.enableValidation();
+addFormValidator.enableValidation();
 
 const initialCards = [
   {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
+    name: "Playa de Cancún",
+    link: "https://i.pinimg.com/originals/c9/93/18/c9931856afde12443dea23bf62daf2a6.jpg",
   },
   {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
+    name: "Ruinas de Xilitla",
+    link: "https://i0.wp.com/blog.vivaaerobus.com/wp-content/uploads/2019/09/Castillo-Edward-James-San-Luis.jpg?w=1400&ssl=1",
   },
   {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
+    name: "Cascadas de Tamul",
+    link: "https://rinconesdemexico.com/wp-content/uploads/shutterstock_1344278147.jpg",
   },
   {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
+    name: "Real de Catorce",
+    link: "https://elsouvenir.com/wp-content/uploads/2020/11/Real-de-Catorce-San-Luis-Potosi.-Foto_-Oscar-Daniel-Fotografia.jpg",
   },
   {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
+    name: "Grutas de Tolantongo",
+    link: "https://grutastolantongo.com.mx/img/atractivos/pozas/pozas.jpg",
   },
   {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
+    name: "Arco del Cabo San Lucas",
+    link: "https://scontent.fpbc2-2.fna.fbcdn.net/v/t39.30808-6/453746946_470618489107322_7851060148051585929_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=833d8c&_nc_ohc=eZlXH2zXNo8Q7kNvgGl9lvP&_nc_zt=23&_nc_ht=scontent.fpbc2-2.fna&_nc_gid=Ae4hHGDRqZMyLOyLNvwUaYK&oh=00_AYCvlWn4UMnAdMh8ia8Buo3QkVX3Mr2mzRfqKxjl7i85SQ&oe=678F512F",
   },
 ];
 
-function createCard(title, link) {
-  const cardElement = cardTemplate
-    .querySelector(".elements__item")
-    .cloneNode(true);
-  const cardImage = cardElement.querySelector(".elements__item-image");
-  const cardTitle = cardElement.querySelector(".elements__item-title");
-  const likeButton = cardElement.querySelector(".elements__item-button");
-  const deleteButton = cardElement.querySelector(".elements__delete");
-
-  cardImage.src = link;
-  cardImage.alt = title;
-  cardTitle.textContent = title;
-
-  cardImage.addEventListener("click", function () {
-    popupImageElement.src = link;
-    popupImageElement.alt = title;
-    imagePopupDescription.textContent = title;
-    openPopup(popupImage);
-  });
-
-  likeButton.addEventListener("click", function (evt) {
-    const likeImage = evt.currentTarget.querySelector(".elements__item-like");
-    if (likeImage.src.includes("like.svg")) {
-      likeImage.src = "images/like-active.svg";
-    } else {
-      likeImage.src = "images/like.svg";
-    }
-  });
-
-  deleteButton.addEventListener("click", function () {
-    cardElement.remove();
-  });
-
-  return cardElement;
-}
-
-function loadInitialCards() {
-  initialCards.forEach((cardData) => {
-    const card = createCard(cardData.name, cardData.link);
-    elementsContainer.append(card);
-  });
-}
-
-document.addEventListener("DOMContentLoaded", loadInitialCards);
-
-function openPopup(popup) {
-  if (popup.classList.contains("popup_image")) {
-    popup.classList.add("popup_image_opened");
-  } else {
-    popup.classList.add("popup_opened");
-    const form = popup.querySelector(".popup__form");
-    if (form) {
-      const inputList = Array.from(form.querySelectorAll(".popup__input"));
-      const buttonElement = form.querySelector(".popup__button");
-      toggleButtonState(inputList, buttonElement, {
-        formSelector: ".popup__form",
-        inputSelector: ".popup__input",
-        submitButtonSelector: ".popup__button",
-        inactiveButtonClass: "popup__button_disabled",
-        inputErrorClass: "popup__input_type_error",
-        errorClass: "popup__error_visible",
-      });
-    }
-  }
-  document.addEventListener("keydown", handleEscClose);
-  popup.addEventListener("mousedown", handleOverlayClick);
-}
-
-function closePopup(popup) {
-  if (popup.classList.contains("popup_image")) {
-    popup.classList.remove("popup_image_opened");
-  } else {
-    popup.classList.remove("popup_opened");
-  }
-  document.removeEventListener("keydown", handleEscClose);
-  popup.removeEventListener("mousedown", handleOverlayClick);
-}
-
-function handleEscClose(evt) {
-  if (evt.key === "Escape") {
-    const openedPopup = document.querySelector(
-      ".popup_opened, .popup_image_opened"
-    );
-    if (openedPopup) {
-      closePopup(openedPopup);
-    }
-  }
-}
-
-function handleOverlayClick(evt) {
-  if (
-    evt.target.classList.contains("popup_opened") ||
-    evt.target.classList.contains("popup_image_opened")
-  ) {
-    closePopup(evt.target);
-  }
+function createCard(data) {
+  const card = new Card(data, "#card-template");
+  return card.generateCard();
 }
 
 function handleProfileFormSubmit(evt) {
@@ -158,8 +82,12 @@ function handleProfileFormSubmit(evt) {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const card = createCard(titleInput.value, linkInput.value);
-  elementsContainer.prepend(card);
+  const cardData = {
+    name: titleInput.value,
+    link: linkInput.value,
+  };
+  const cardElement = createCard(cardData);
+  elementsContainer.prepend(cardElement);
   closePopup(popupAdd);
   evt.target.reset();
 }
@@ -177,3 +105,8 @@ popupAddClose.addEventListener("click", () => closePopup(popupAdd));
 formAdd.addEventListener("submit", handleAddCardFormSubmit);
 
 popupImageClose.addEventListener("click", () => closePopup(popupImage));
+
+initialCards.forEach((cardData) => {
+  const cardElement = createCard(cardData);
+  elementsContainer.append(cardElement);
+});

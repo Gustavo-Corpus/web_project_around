@@ -20,8 +20,8 @@ export const popupSelectors = {
   imagePopup: ".popup_image",
   editForm: "#edit_form",
   addForm: "#add_form",
-  nameInput: ".popup__input-name",
-  jobInput: ".popup__input-job",
+  nameInput: ".popup__input_name",
+  jobInput: ".popup__input_job",
 };
 
 export const cardSelectors = {
@@ -36,14 +36,14 @@ export const forms = {
 
 export const editProfileElements = {
   form: forms.editForm,
-  nameInput: document.querySelector(".popup__input-name"),
-  jobInput: document.querySelector(".popup__input-job"),
+  nameInput: document.querySelector(".popup__input_name"),
+  jobInput: document.querySelector(".popup__input_job"),
   submitButton: document.querySelector(".popup__button"),
 };
 
 export const addCardElements = {
   form: forms.addForm,
-  titleInput: document.querySelector(".popup__input-title"),
-  linkInput: document.querySelector(".popup__input-link"),
+  titleInput: document.querySelector(".popup__input_title"),
+  linkInput: document.querySelector(".popup__input_link"),
   submitButton: document.querySelector(".popup__button"),
 };

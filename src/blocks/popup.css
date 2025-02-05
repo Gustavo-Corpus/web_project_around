@@ -38,13 +38,6 @@
   align-items: center;
 }
 
-.popup__image-container {
-  position: relative;
-  margin: 0;
-  padding: 0;
-  background: none;
-}
-
 .popup__image {
   display: block;
   max-width: 75vw;
@@ -52,7 +45,7 @@
   object-fit: cover;
 }
 
-.popup__image-description {
+.popup__description {
   font-size: 12px;
   font-weight: 400;
   color: #fff;
@@ -72,6 +65,13 @@
   max-width: 430px;
   width: 100%;
   box-sizing: border-box;
+}
+
+.popup__container_image {
+  position: relative;
+  margin: 0;
+  padding: 0;
+  background: none;
 }
 
 .popup__close {

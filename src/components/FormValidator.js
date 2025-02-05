@@ -7,7 +7,6 @@ export default class FormValidator {
     this._errorClass = config.errorClass;
     this._formElement = formElement;
 
-    // Pre-select elements that will be used multiple times
     this._inputList = Array.from(
       this._formElement.querySelectorAll(this._inputSelector)
     );

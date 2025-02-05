@@ -1,4 +1,3 @@
-// Imports de componentes
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
 import Section from "../components/Section.js";
@@ -6,7 +5,6 @@ import PopupWithImage from "../components/PopupWithImage.js";
 import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
-// Imports de utilidades
 import { initialCards } from "../utils/initialCards.js";
 import { validationConfig, settings } from "../utils/config.js";
 import {
@@ -19,17 +17,14 @@ import {
   addCardElements,
 } from "../utils/constants.js";
 
-// Instancia de UserInfo
 const userInfo = new UserInfo({
   nameSelector: profileSelectors.nameElement,
   jobSelector: profileSelectors.jobElement,
 });
 
-// Instancia de PopupWithImage
 const imagePopup = new PopupWithImage(popupSelectors.imagePopup);
 imagePopup.setEventListeners();
 
-// Función para crear una nueva tarjeta
 const createCard = (data) => {
   const card = new Card(data, cardSelectors.template, (name, link) => {
     imagePopup.open(name, link);
@@ -37,7 +32,6 @@ const createCard = (data) => {
   return card.generateCard();
 };
 
-// Instancia de Section para las tarjetas iniciales
 const cardSection = new Section(
   {
     items: initialCards,
@@ -49,10 +43,8 @@ const cardSection = new Section(
   cardSelectors.container
 );
 
-// Renderizar tarjetas iniciales
 cardSection.renderItems();
 
-// PopupWithForm para editar perfil
 const editProfilePopup = new PopupWithForm(
   popupSelectors.editPopup,
   (formData) => {
@@ -65,7 +57,6 @@ const editProfilePopup = new PopupWithForm(
 );
 editProfilePopup.setEventListeners();
 
-// PopupWithForm para agregar tarjeta
 const addCardPopup = new PopupWithForm(popupSelectors.addPopup, (formData) => {
   const cardElement = createCard({
     name: formData.title,
@@ -76,7 +67,6 @@ const addCardPopup = new PopupWithForm(popupSelectors.addPopup, (formData) => {
 });
 addCardPopup.setEventListeners();
 
-// Event listeners para los botones de editar perfil y agregar tarjeta
 document
   .querySelector(profileSelectors.editButton)
   .addEventListener("click", () => {
@@ -92,7 +82,6 @@ document
     addCardPopup.open();
   });
 
-// Validación de formularios
 const editFormValidator = new FormValidator(validationConfig, forms.editForm);
 const addFormValidator = new FormValidator(validationConfig, forms.addForm);
 

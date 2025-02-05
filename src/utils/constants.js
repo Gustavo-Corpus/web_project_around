@@ -1,4 +1,3 @@
-// Selectors
 export const selectors = {
   formSelector: ".popup__form",
   inputSelector: ".popup__input",
@@ -8,7 +7,6 @@ export const selectors = {
   errorClass: "popup__error_visible",
 };
 
-// DOM Elements
 export const profileSelectors = {
   nameElement: ".profile__info-title",
   jobElement: ".profile__info-subtitle",
@@ -31,7 +29,6 @@ export const cardSelectors = {
   container: ".elements",
 };
 
-// DOM Elements (pre-selected)
 export const forms = {
   editForm: document.querySelector("#edit_form"),
   addForm: document.querySelector("#add_form"),

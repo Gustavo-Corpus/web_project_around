@@ -42,7 +42,7 @@
   text-overflow: ellipsis;
 }
 
-.button-edit {
+.profile__edit-button {
   grid-area: edit;
   background: none;
   border: none;
@@ -70,12 +70,12 @@
   opacity: 0.6;
 }
 
-.button-icon {
+.profile__edit-icon {
   align-self: baseline;
   width: 100%;
 }
 
-.button-icon:hover {
+.profile__edit-icon:hover {
   opacity: 0.6;
 }
 
@@ -113,7 +113,7 @@
     max-width: 60vw;
     max-height: 7vw;
   }
-  .button-edit {
+  .profile__edit-button {
     width: 5.6vw;
     justify-self: baseline;
   }

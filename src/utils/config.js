@@ -8,8 +8,8 @@ export const validationConfig = {
 };
 
 export const settings = {
-  imagePopupClass: "popup_image_opened",
   popupOpenedClass: "popup_opened",
+  imagePopupClass: "popup_image_opened",
   cardLikeActiveImage: "images/like-active.svg",
   cardLikeInactiveImage: "images/like.svg",
 };

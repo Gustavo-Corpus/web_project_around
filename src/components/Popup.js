@@ -13,6 +13,7 @@ export default class Popup {
 
   close() {
     this._popup.classList.remove(settings.popupOpenedClass);
+    this._popup.classList.remove(settings.imagePopupClass);
     document.removeEventListener("keydown", this._handleEscClose);
   }
 
@@ -26,6 +27,7 @@ export default class Popup {
     this._popup.addEventListener("mousedown", (evt) => {
       if (
         evt.target.classList.contains(settings.popupOpenedClass) ||
+        evt.target.classList.contains(settings.imagePopupClass) ||
         evt.target.classList.contains("popup__close")
       ) {
         this.close();

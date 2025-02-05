@@ -19,6 +19,7 @@ export default class Card {
     this._likeButton = this._element.querySelector(".elements__item-button");
     this._deleteButton = this._element.querySelector(".elements__delete");
     this._cardImage = this._element.querySelector(".elements__item-image");
+    this._likeImage = this._element.querySelector(".elements__item-like");
 
     this._likeButton.addEventListener("click", () => this._handleLikeClick());
     this._deleteButton.addEventListener("click", () =>
@@ -30,11 +31,11 @@ export default class Card {
   }
 
   _handleLikeClick() {
-    const likeImage = this._element.querySelector(".elements__item-like");
-    if (likeImage.src.includes("like.svg")) {
-      likeImage.src = settings.cardLikeActiveImage;
+    this._likeImage.classList.toggle("elements__item-like_active");
+    if (this._likeImage.classList.contains("elements__item-like_active")) {
+      this._likeImage.src = settings.cardLikeActiveImage;
     } else {
-      likeImage.src = settings.cardLikeInactiveImage;
+      this._likeImage.src = settings.cardLikeInactiveImage;
     }
   }
 
@@ -51,7 +52,7 @@ export default class Card {
     const cardTitle = this._element.querySelector(".elements__item-title");
 
     cardImage.src = this._link;
-    cardImage.alt = this._name;
+    cardImage.alt = `Imagen de ${this._name}`; // Mejora la accesibilidad
     cardTitle.textContent = this._name;
 
     return this._element;

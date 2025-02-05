@@ -10,7 +10,7 @@ export const selectors = {
 export const profileSelectors = {
   nameElement: ".profile__info-title",
   jobElement: ".profile__info-subtitle",
-  editButton: ".button-icon",
+  editButton: ".profile__edit-icon",
   addButton: ".button-add",
 };
 

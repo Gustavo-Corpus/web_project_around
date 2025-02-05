@@ -52,7 +52,7 @@ export default class Card {
     const cardTitle = this._element.querySelector(".elements__item-title");
 
     cardImage.src = this._link;
-    cardImage.alt = `Imagen de ${this._name}`; // Mejora la accesibilidad
+    cardImage.alt = `Imagen de ${this._name}`;
     cardTitle.textContent = this._name;
 
     return this._element;

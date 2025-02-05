@@ -39,10 +39,9 @@
 }
 
 .popup__image {
-  display: block;
-  max-width: 75vw;
+  max-width: 100%;
   max-height: 75vh;
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .popup__description {
@@ -67,11 +66,13 @@
   box-sizing: border-box;
 }
 
-.popup__container_image {
-  position: relative;
-  margin: 0;
+.popup__preview {
+  max-width: 75vw;
+  max-height: 75vh;
+  width: auto;
+  height: auto;
+  background: transparent;
   padding: 0;
-  background: none;
 }
 
 .popup__close {

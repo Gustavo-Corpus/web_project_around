@@ -15,12 +15,12 @@ export default class FormValidator {
     );
   }
 
-  _showInputError(inputElement) {
+  _showInputError(inputElement, message) {
     const errorElement = this._formElement.querySelector(
       `.${inputElement.name}-error`
     );
     inputElement.classList.add(this._inputErrorClass);
-    errorElement.textContent = inputElement.validationMessage;
+    errorElement.textContent = message || inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
   }
 
@@ -34,6 +34,37 @@ export default class FormValidator {
   }
 
   _checkInputValidity(inputElement) {
+    if (inputElement.value.trim().length === 0) {
+      this._showInputError(inputElement, "Este campo no puede estar vacío");
+      return;
+    }
+
+    if (inputElement.type === "url") {
+      const value = inputElement.value;
+      const urlPattern = /^https?:\/\/(www\.)?[\w-]+\.[a-z]{2,}\/.+$/i;
+
+      if (!urlPattern.test(value)) {
+        this._showInputError(
+          inputElement,
+          "Por favor, introduce una URL válida"
+        );
+        return;
+      }
+
+      if (
+        !value.includes(".jpg") &&
+        !value.includes(".jpeg") &&
+        !value.includes(".png") &&
+        !value.includes(".gif")
+      ) {
+        this._showInputError(
+          inputElement,
+          "El enlace debe contener una imagen (jpg, jpeg, png o gif)"
+        );
+        return;
+      }
+    }
+
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
     } else {
@@ -43,7 +74,8 @@ export default class FormValidator {
 
   _hasInvalidInput() {
     return this._inputList.some((inputElement) => {
-      return !inputElement.validity.valid || !inputElement.value.length;
+      const isOnlySpaces = inputElement.value.trim().length === 0;
+      return !inputElement.validity.valid || isOnlySpaces;
     });
   }
 
@@ -59,7 +91,6 @@ export default class FormValidator {
 
   _setEventListeners() {
     this._toggleButtonState();
-
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);

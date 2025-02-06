@@ -73,6 +73,7 @@
   height: auto;
   background: transparent;
   padding: 0;
+  position: relative;
 }
 
 .popup__close {

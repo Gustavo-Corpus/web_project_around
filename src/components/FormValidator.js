@@ -13,6 +13,7 @@ export default class FormValidator {
     this._buttonElement = this._formElement.querySelector(
       this._submitButtonSelector
     );
+    this._customErrors = new Map();
   }
 
   _showInputError(inputElement, message) {
@@ -22,6 +23,7 @@ export default class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = message || inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
+    this._customErrors.set(inputElement.name, true);
   }
 
   _hideInputError(inputElement) {
@@ -31,24 +33,26 @@ export default class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
+    this._customErrors.delete(inputElement.name);
   }
 
   _checkInputValidity(inputElement) {
     if (inputElement.value.trim().length === 0) {
       this._showInputError(inputElement, "Este campo no puede estar vacío");
-      return;
+      return false;
     }
 
     if (inputElement.type === "url") {
       const value = inputElement.value;
-      const urlPattern = /^https?:\/\/(www\.)?[\w-]+\.[a-z]{2,}\/.+$/i;
+      const urlPattern =
+        /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/;
 
       if (!urlPattern.test(value)) {
         this._showInputError(
           inputElement,
           "Por favor, introduce una URL válida"
         );
-        return;
+        return false;
       }
 
       if (
@@ -61,7 +65,7 @@ export default class FormValidator {
           inputElement,
           "El enlace debe contener una imagen (jpg, jpeg, png o gif)"
         );
-        return;
+        return false;
       }
     }
 
@@ -73,6 +77,10 @@ export default class FormValidator {
   }
 
   _hasInvalidInput() {
+    if (this._customErrors.size > 0) {
+      return true;
+    }
+
     return this._inputList.some((inputElement) => {
       const isOnlySpaces = inputElement.value.trim().length === 0;
       return !inputElement.validity.valid || isOnlySpaces;
@@ -107,6 +115,7 @@ export default class FormValidator {
   }
 
   resetValidation() {
+    this._customErrors.clear();
     this._toggleButtonState();
     this._inputList.forEach((inputElement) => {
       this._hideInputError(inputElement);

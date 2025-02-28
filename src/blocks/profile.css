@@ -16,7 +16,41 @@
   height: 11.71vw;
   border-radius: 50%;
   object-fit: cover;
+}
+
+.profile__avatar-container {
+  position: relative;
+  grid-area: image;
+  width: 11.71vw;
+  height: 11.71vw;
+  border-radius: 50%;
   margin: -1.64vw 2.34vw -1.64vw 0px;
+  overflow: hidden;
+}
+
+.profile__avatar-edit {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-image: url("../images/edit-avatar.svg");
+  background-position: center;
+  background-repeat: no-repeat;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.profile__avatar-container:hover .profile__avatar-edit {
+  opacity: 1;
+}
+
+.profile__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .profile__info-title {
